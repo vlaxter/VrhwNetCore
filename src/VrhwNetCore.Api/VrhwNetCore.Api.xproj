@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>5c30c19c-8a2a-4a74-854c-8eb5b597b6d3</ProjectGuid>
-    <RootNamespace>VrhwNerCore.Api</RootNamespace>
+    <ProjectGuid>661f14b8-f234-4413-b3a3-bbb8ffd9e7c4</ProjectGuid>
+    <RootNamespace>VrhwNetCore.Api</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
