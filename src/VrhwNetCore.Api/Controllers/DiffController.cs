@@ -16,23 +16,55 @@ namespace VrhwNerCore.Api.Controllers
 
         [Route("{id:int}/left")]
         [HttpPut]
-        public void Left(int id, [FromBody]RequestModel request)
+        public IActionResult Left(int id, [FromBody]RequestModel request)
         {
-            _diffService.Left(id, request.Data);
+            if (request != null && !string.IsNullOrWhiteSpace(request.Data))
+            {
+                var diff = _diffService.Left(id, request.Data);
+                if (diff != null)
+                {
+                    return Created(string.Format($"v1/diff/{id}"), diff);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
         }
 
         [Route("{id:int}/right")]
         [HttpPut]
-        public void Right(int id, [FromBody]RequestModel request)
+        public IActionResult Right(int id, [FromBody]RequestModel request)
         {
-            _diffService.Right(id, request.Data);
+            if (request != null && !string.IsNullOrWhiteSpace(request.Data))
+            {
+                var diff = _diffService.Right(id, request.Data);
+                if (diff != null)
+                {
+                    return Created(string.Format($"v1/diff/{id}"), diff);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
         }
 
         [Route("{id:int}")]
         [HttpGet]
-        public object Diff(int id)
+        public IActionResult Diff(int id)
         {
-            return _diffService.GetDiff(id);
+            var diff = _diffService.GetDiff(id);
+            if (diff == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(diff);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace VrhwNetCore.Repository.Memory
     {
         private static Dictionary<int, DiffDto> _memory = new Dictionary<int, DiffDto>();
 
-        public void UpsertDiff(int id, string left, string right)
+        public DiffDto UpsertDiff(int id, string left, string right)
         {
             if (!_memory.ContainsKey(id))
             {
@@ -20,6 +20,8 @@ namespace VrhwNetCore.Repository.Memory
 
             _memory[id].Left = left != null ? left : _memory[id].Left;
             _memory[id].Right = right != null ? right : _memory[id].Right;
+
+            return _memory[id];
         }
 
         public DiffDto GetDiff(int id)

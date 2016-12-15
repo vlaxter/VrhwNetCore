@@ -16,26 +16,34 @@ namespace VrhwNetCore.Core.Services
             _diffReository = diffRepository;
         }
 
-        public bool Left(int id, string data)
+        public DiffModel Left(int id, string data)
         {
             if (data.IsBase64String())
             {
-                _diffReository.UpsertDiff(id, data, null);
-                return true;
+                var diffDto = _diffReository.UpsertDiff(id, data, null);
+                return new DiffModel
+                {
+                    Left = diffDto.Left,
+                    Right = diffDto.Right
+                };
             }
 
-            return false;
+            return null;
         }
 
-        public bool Right(int id, string data)
+        public DiffModel Right(int id, string data)
         {
             if (data.IsBase64String())
             {
-                _diffReository.UpsertDiff(id, null, data);
-                return true;
+                var diffDto = _diffReository.UpsertDiff(id, null, data);
+                return new DiffModel
+                {
+                    Left = diffDto.Left,
+                    Right = diffDto.Right
+                };
             }
 
-            return false;
+            return null;
         }
 
         public object GetDiff(int id)
@@ -45,6 +53,14 @@ namespace VrhwNetCore.Core.Services
             if (diff == null)
             {
                 return null;
+            }
+
+            if (diff.Right == null || diff.Left == null)
+            {
+                return new
+                {
+                    diffResultType = DiffMessages.SizeDoNotMatchResponse
+                };
             }
 
             var leftData = Convert.FromBase64String(diff.Left);
