@@ -17,7 +17,8 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "VrhwNetCore.Core": "1.0.0-*",
     "VrhwNetCore.Repository.Memory": "1.0.0-*",
-    "VrhwNetCore.Shared": "1.0.0-*"
+    "VrhwNetCore.Shared": "1.0.0-*",
+    "Swashbuckle": "6.0.0-beta902"
   },
 
   "tools": {
